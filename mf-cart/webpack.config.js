@@ -16,16 +16,16 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
-    port: 3001,
+    port: 3002,
   },
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:3002/",
     chunkFilename: "[id].[contenthash].js"
   },
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.(js|jsx)?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
@@ -36,9 +36,9 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "mfProducts",
-      library: { type: "var", name: "mfProducts" },
-      filename: "mfProducts.js",
+      name: "mfCart",
+      library: { type: "var", name: "mfCart" },
+      filename: "mfCart.js",
       exposes: {
         "./App": "./src/App",
       },

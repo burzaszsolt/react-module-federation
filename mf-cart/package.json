@@ -1,11 +1,11 @@
 {
-  "name": "mf-products",
+  "name": "mf-cart",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
-    "serve": "serve dist -p 3001",
+    "serve": "serve dist -p 3002",
     "clean": "rm -rf dist"
   },
   "keywords": [],
