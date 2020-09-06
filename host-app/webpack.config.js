@@ -11,6 +11,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public"),
     port: 3000,
+    historyApiFallback: true
   },
   output: {
     publicPath: "http://localhost:3000/",
@@ -18,13 +19,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /bootstrap\.js$/,
-        loader: "bundle-loader",
-        options: {
-          lazy: true,
-        },
-      },
       {
         test: /\.jsx?$/,
         loader: "babel-loader",
@@ -38,9 +32,14 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: "hostApp",
+      library: { type: "var", name: "hostApp" },
+      filename: "remoteEntry.js",
       remotes: {
-        mfProducts: "mfProducts@http://localhost:3001/mfProducts.js",
-        mfCart: "mfCart@http://localhost:3002/mfCart.js",
+        mfProducts: "mfProducts",
+        mfCart: "mfCart"
+      },
+      exposes: {
+        "./App": "./src/App",
       },
       shared: {
         ...deps,

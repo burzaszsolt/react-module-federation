@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     main: ['@babel/polyfill', path.resolve('.', 'src', 'index.js')]
   },
-  mode: "production",
+  mode: "development",
   resolve: {
     alias: {
       src: path.resolve('.', 'src')
@@ -17,6 +17,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public"),
     port: 3001,
+    historyApiFallback: true
   },
   output: {
     publicPath: "http://localhost:3001/",
@@ -38,9 +39,12 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "mfProducts",
       library: { type: "var", name: "mfProducts" },
-      filename: "mfProducts.js",
+      filename: "remoteEntry.js",
       exposes: {
-        "./App": "./src/App",
+        "./ProductService": "./src/ProductService",
+      },
+      remotes: {
+        hostApp: "hostApp"
       },
       shared: {
         ...deps,

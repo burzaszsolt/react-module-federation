@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     main: ['@babel/polyfill', path.resolve('.', 'src', 'index.js')]
   },
-  mode: "production",
+  mode: "development",
   resolve: {
     alias: {
       src: path.resolve('.', 'src')
@@ -17,6 +17,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "public"),
     port: 3002,
+    historyApiFallback: true
   },
   output: {
     publicPath: "http://localhost:3002/",
@@ -25,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
+        test: /\.jsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
@@ -38,9 +39,12 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "mfCart",
       library: { type: "var", name: "mfCart" },
-      filename: "mfCart.js",
+      filename: "remoteEntry.js",
+      remotes: {
+        hostApp: "hostApp"
+      },
       exposes: {
-        "./App": "./src/App",
+        "./CartService": "./src/CartService",
       },
       shared: {
         ...deps,

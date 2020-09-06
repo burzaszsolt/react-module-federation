@@ -7,7 +7,7 @@ import CartContainer from './containers/Cart';
 import Layout from './components/Layout';
 import Cart from './components/Cart';
 
-const App = props => {
+const CartService = props => {
   return (
     <CombinedContextProvider {...props}>
       <Layout>
@@ -34,4 +34,4 @@ const App = props => {
   );
 };
 
-export default App;
+export default CartService;
