@@ -10,7 +10,7 @@ import useStyles from './styles';
 import Theme from '../Theme';
 import CartBadge from '../CartBadge';
 
-const Navbar = ({ isCartLoading, cart }) => {
+const Navbar = ({ cart }) => {
   let history = useHistory();
   const classes = useStyles();
   const showCartBadge = history.location.pathname === '/';
