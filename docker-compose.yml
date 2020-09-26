@@ -1,0 +1,29 @@
+version: '2.0'
+services:
+  mfe-frenchie-store-host:
+    build:
+      context: ./host-app
+    ports:
+      - "3000:3000"
+    container_name: mfe-frenchie-store-host
+    stdin_open: true
+  mfe-products:
+      build:
+        context: ./mf-products
+      ports:
+        - "3001:3001"
+      container_name: mfe-products
+      stdin_open: true
+  mfe-cart:
+    build:
+      context: ./mf-cart
+    ports:
+      - "3002:3002"
+    container_name: mfe-cart
+    stdin_open: true
+  mfe-backend:
+    build:
+      context: './backend'
+    ports:
+      - "3003:3003"
+    container_name: mfe-frenchie-store-backend
